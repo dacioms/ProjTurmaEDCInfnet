@@ -2,7 +2,7 @@
 tarefas = []
 
 # Função para adicionar uma nova tarefa
-def adicionar_tarefa(id_tarefa, nome, descricao, data_inicio, data_conclusao, concluida):
+def adicionar_tarefa(lista, id_tarefa , nome, descricao, data_inicio, data_conclusao, concluida):
     tarefa = {
         "id": id_tarefa,
         "nome": nome,
@@ -11,7 +11,7 @@ def adicionar_tarefa(id_tarefa, nome, descricao, data_inicio, data_conclusao, co
         "data_conclusao": data_conclusao,
         "concluida": concluida
     }
-    tarefas.append(tarefa)
+    lista.append(tarefa)
 
 # Função para exibir todas as tarefas
 def exibir_tarefas(id_tarefa = None):
