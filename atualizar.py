@@ -1,4 +1,4 @@
-def atualizar_tarefa(lista,id,nome="",descricao="",data_inicio="",data_conclusao="",concluida=""):
+def atualizar_tarefa(lista,id,nome=None,descricao="",data_inicio="",data_conclusao="",concluida=""):
     """
     Recebe obrigatoriamente: lista,id e um ou mais parâmentros opcionais.\n
     Parâmetros opcionais: nome,descricao,status,prazo_final,urgencia.\n
@@ -7,14 +7,15 @@ def atualizar_tarefa(lista,id,nome="",descricao="",data_inicio="",data_conclusao
     """
     
     if nome=="" and descricao=="" and data_inicio=="" and data_conclusao=="" and concluida=="":
+        print("Argumentos passados errado")
         return lista
         
     for n in lista:
         if int(n["id"])==int(id):
-            if nome!="": n["nome"]=nome
+            if not(nome): n["nome"]=nome
             if descricao!="": n["descricao"]=descricao
             if data_inicio!="": n["data_inicio"]=data_inicio
             if data_conclusao!="": n["data_conclusao"]=data_conclusao
             if concluida!="": n["concluida"]=concluida
             return lista    
-    return lista
+    #return lista

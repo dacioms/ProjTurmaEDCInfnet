@@ -2,6 +2,9 @@
 import argparse
 from PIL import Image
 import os
+from ManArq import *
+import dicionario_de_tarefas as dctT
+from remover_tarefa import *
 
 # Lista vazia de tarefas
 listaTarefas = []
@@ -18,12 +21,16 @@ while True:
     print("6- Remover Tarefa")
     print("7- EXODIA")
     print("0- Sair")
+    listaTarefas = ler()
 
     # Pegar a opção do usuário.
     opcao = input("Escolha: ")
 
     # 1. Adicionar Tarefa: Permitir ao usuário adicionar uma nova tarefa à lista de tarefas pendentes.
     if opcao == "1":
+        
+        dctT.exibir_tarefas.append(listaTarefas) 
+        
         print("\nOpções de entrega:")
         print("1- Entregar no mesmo dia")
         print("2- Entregar em 7 dias")
@@ -39,6 +46,7 @@ while True:
     # 2. Listar Tarefas Pendentes: Mostrar todas as tarefas pendentes na lista, enumerando-as.
     elif opcao == "2":
         print("\nTarefas pendentes:")
+        ler()
         for i, (tarefa, prazo) in enumerate(listaTarefas):
             if prazo == "1":
                 prazo_descricao = "Entregar no mesmo dia"
@@ -88,7 +96,7 @@ while True:
         else:
             tarefa_concluida = int(input("Digite o número da tarefa concluída: "))
             if tarefa_concluida <= len(listaTarefas) and tarefa_concluida > 0:
-                tarefa, entrega = listaTarefas.pop(tarefa_concluida - 1)
+                tarefa, entrega = listaTarefas.pop(int(tarefa_concluida) - 1)
                 tarefas_concluidas.append((tarefa, entrega))
                 print("Tarefa marcada como concluída!")
             else:
@@ -103,21 +111,22 @@ while True:
     # 6. Remover Tarefa: Dar ao usuário a opção de remover uma tarefa da lista.
     elif opcao == "6":
         print("\nTarefas pendentes:")
-        for i, (tarefa, prazo) in enumerate(listaTarefas):
-            if prazo == "1":
-                prazo_descricao = "Entregar no mesmo dia"
-            elif prazo == "2":
-                prazo_descricao = "Entregar em 7 dias"
-            else:
-                prazo_descricao = "Entregar em 15 dias"
-            print(f"{i+1} - {tarefa} (Prazo: {prazo_descricao})")
+        # for i, (tarefa, prazo) in enumerate(listaTarefas):
+        #     if prazo == "1":
+        #         prazo_descricao = "Entregar no mesmo dia"
+        #     elif prazo == "2":
+        #         prazo_descricao = "Entregar em 7 dias"
+        #     else:
+        #         prazo_descricao = "Entregar em 15 dias"
+        #     print(f"{i+1} - {tarefa} (Prazo: {prazo_descricao})")
 
         if len(listaTarefas) == 0:
             print("Não há tarefas pendentes para remover.")
         else:
             tarefa_remover = int(input("Digite o número da tarefa a remover: "))
             if tarefa_remover <= len(listaTarefas) and tarefa_remover > 0:
-                tarefa, _ = listaTarefas.pop(tarefa_remover - 1)
+                listaTarefas =  remover_tarefa(listaTarefas, tarefa_remover) 
+                # tarefa, _ = listaTarefas.pop(tarefa_remover - 1)
                 print(f"Tarefa '{tarefa}' removida com sucesso!")
             else:
                 print("Número de tarefa inválido.")
@@ -133,6 +142,7 @@ while True:
     
     # 0. Sair: Encerrar o programa.
     elif opcao == "0":
+        salvar(listaTarefas)
         print("Encerrando...")
         break
 

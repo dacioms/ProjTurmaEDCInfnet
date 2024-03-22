@@ -20,6 +20,7 @@ with open("Tarefas.csv", 'r', encoding= "utf-8") as ler_tarefas:
   def ler():
     for line in lista:
       lista_tarefas.writelines(line + "\n")
+      
 
 
 
